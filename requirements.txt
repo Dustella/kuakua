@@ -1,0 +1,5 @@
+jieba
+flask
+gunicorn
+gevent
+gensim

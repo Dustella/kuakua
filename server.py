@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-# File: sim_kuakua.py
-# Author: Hualong Zhang <nankaizhl@gmail.com>
-# CreateDate: 19-04-3
-# Continued by Dustella
-# 2021.12.19
-
 from flask import Flask,request
 import random
 from sentence_similarity.sentenceSimilarity import SentenceSimilarity
@@ -50,34 +43,22 @@ class kuakuaChat():
             answer_list += answer
         return answer_list
 
-    def start_server(self):
-        """
-        启动后端服务器，无参数
-        """
-        app=Flask(__name__)
 
-        @app.route("/getKuakua",methods=["GET"])
-        def kuakua():
-            input = request.args.get("sentence")
-            return random.choice(self.answer_question(input))
-        app.run()
         
 
 
 
 main_bot = kuakuaChat()
 
-if __name__ == '__main__':
-    # while True:
-    #     try:
-    #         user_input = input('USER:')
-    #         answer_list = main_bot.answer_question(user_input)
-    #         response = random.choice(answer_list)
-    #         print('BOT:', response)
-    #     # 直到按ctrl-c 或者 ctrl-d 才会退出
-    #     except (KeyboardInterrupt, EOFError, SystemExit):
-    #         break
+app=Flask(__name__)
 
-    main_bot.start_server()
+@app.route("/getKuakua",methods=["GET"])
+
+def kuakua():
+    input = request.args.get("sentence")
+    return random.choice(main_bot.answer_question(input))
+
+if __name__ == "__main__":
+    app.run()
 
 
